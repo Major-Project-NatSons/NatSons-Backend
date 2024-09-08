@@ -10,10 +10,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        country_code: {
-            type: DataTypes.STRING,
-            allowNull: false
-        }
     },
 );
     return Country;
