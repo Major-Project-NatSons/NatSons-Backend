@@ -22,16 +22,35 @@ db.sequelize = sequelize;
 // Import the models
 const countryModel = require('./countryModel')(sequelize, DataTypes);
 const stateModel = require('./stateModel')(sequelize, DataTypes);
-
+const homeModel = require('./homeDataModel')(sequelize,DataTypes);
 
 // Define the One-to-Many relationship between Country and State
 countryModel.hasMany(stateModel, {
-  foreignKey: 'country_id', // The foreign key in the State table
-  as: 'states'             // Optional: alias for the relation
+  foreignKey: 'country_id', 
+  as: 'states'             
 });
 stateModel.belongsTo(countryModel, {
   foreignKey: 'country_id',
   as: 'country'
+});
+
+//Define one to many relation between home and country table along with home and state table.
+countryModel.hasMany(homeModel,{
+  foreignKey: 'country_id',
+  as: 'HomeData'
+});
+homeModel.belongsTo(countryModel,{
+  foreignKey: 'country_id',
+  as: 'country'
+});
+
+stateModel.hasMany(homeModel,{
+  foreignKey: 'state_id',
+  as: 'HomeData'
+});
+homeModel.belongsTo(stateModel,{
+  foreignKey: 'state_id',
+  as: 'state'
 });
 
 // Sync the models (create tables and define relationships)
