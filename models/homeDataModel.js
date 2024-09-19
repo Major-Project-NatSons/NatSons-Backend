@@ -39,14 +39,21 @@ module.export = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        home_type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         price: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
         image: {
             type: DataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false
         },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     });
 
     return Home

@@ -7,7 +7,7 @@ exports.getAllHomes = async (req, res) => {
         res.status(200).send({status:true, data: homes});
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).send({status:false, message: "Server Error" });
     }
 };
 
@@ -16,12 +16,12 @@ exports.getHome = async (req, res) => {
     try {
         const home = await homeModel.findByPk(req.params.id);
         if (!home) {
-            return res.status(404).json({ message: "Home not found" });
+            return res.status(200).send({ status: false ,message: "No data found" });
         }
-        res.json(home);
+        res.status(200).send({status: true,message: "Data found",data: home});
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).send({ status:false, message: "Server Error" });
     }
 };
 
@@ -29,10 +29,10 @@ exports.getHome = async (req, res) => {
 exports.createHome = async (req, res) => {
     try {
         const home = await homeModel.create(req.body);
-        res.json(home);
+        res.status(201).send({status: true, message: "Details Added"});
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).send({status: false, message: "Server Error" });
     }
 };
 
@@ -41,13 +41,13 @@ exports.updateHome = async (req, res) => {
     try {
         const home = await homeModel.findByPk(req.params.id);
         if (!home) {
-            return res.status(404).json({ message: "Home not found" });
+            return res.status(200).send({status:false, message: "Home details not found" });
         }
         await home.update(req.body);
-        res.json(home);
+        res.status(200).send({status: true, message: "Home details updated"});
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).send({ status: false, message: "Server Error" });
     }
 };
 
@@ -56,13 +56,13 @@ exports.deleteHome = async (req, res) => {
     try {
         const home = await homeModel.findByPk(req.params.id);
         if (!home) {
-            return res.status(404).json({ message: "Home not found" });
+            return res.status(200).send({status: false, message: "Home not found" });
         }
         await home.destroy();
-        res.json({ message: "Home deleted successfully" });
+        res.status(200).send({status:true, message: "Home details deleted successfully" });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).send({status:false, message: "Server Error" });
     }
 }
 
@@ -74,10 +74,10 @@ exports.getHomesByCountry = async (req, res) => {
                 country_id: req.params.country_id
             }
         });
-        res.json(homes);
+        res.status(200).send({status: true,message: "Data found", data: homes});
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).send({ status: false, message: "Server Error" });
     }
 }
 
@@ -89,10 +89,10 @@ exports.getHomesByState = async (req, res) => {
                 state_id: req.params.state_id
             }
         });
-        res.json(homes);
+        res.send(homes);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).send({ message: "Server Error" });
     }
 }
 
@@ -104,10 +104,10 @@ exports.getHomesByCity = async (req, res) => {
                 city: req.params.city
             }
         });
-        res.json(homes);
+        res.send(homes);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).send({ message: "Server Error" });
     }
 }
 
@@ -119,10 +119,10 @@ exports.getHomesByPropertyType = async (req, res) => {
                 property_type: req.params.property_type
             }
         });
-        res.json(homes);
+        res.send(homes);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).send({ message: "Server Error" });
     }
 }
 
@@ -137,9 +137,9 @@ exports.getHomesByPrice = async (req, res) => {
                 }
             }
         });
-        res.json(homes);
+        res.send(homes);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Server Error" });
+        res.status(500).send({ message: "Server Error" });
     }
 }
