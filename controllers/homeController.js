@@ -1,7 +1,7 @@
 const homeModel = require('../models/dbConfig').db.homeModel;
 const { Op } = require('sequelize');
 // Get all homes
-exports.getAllHomes = async (req, res) => {
+module.exports.getAllHomes = async (req, res) => {
     try {
         const homes = await homeModel.findAll();
         res.status(200).send({status:true, data: homes});
@@ -12,7 +12,7 @@ exports.getAllHomes = async (req, res) => {
 };
 
 // Get a single home
-exports.getHome = async (req, res) => {
+module.exports.getHomeById = async (req, res) => {
     try {
         const home = await homeModel.findByPk(req.params.id);
         if (!home) {
@@ -26,7 +26,7 @@ exports.getHome = async (req, res) => {
 };
 
 // Create a new home
-exports.createHome = async (req, res) => {
+module.exports.createHome = async (req, res) => {
     try {
         const home = await homeModel.create(req.body);
         res.status(201).send({status: true, message: "Details Added"});
@@ -37,7 +37,7 @@ exports.createHome = async (req, res) => {
 };
 
 // Update a home
-exports.updateHome = async (req, res) => {
+module.exports.updateHome = async (req, res) => {
     try {
         const home = await homeModel.findByPk(req.params.id);
         if (!home) {
@@ -52,7 +52,7 @@ exports.updateHome = async (req, res) => {
 };
 
 // Delete a home
-exports.deleteHome = async (req, res) => {
+module.exports.deleteHome = async (req, res) => {
     try {
         const home = await homeModel.findByPk(req.params.id);
         if (!home) {
@@ -67,7 +67,7 @@ exports.deleteHome = async (req, res) => {
 }
 
 // Get all homes in a specific country
-exports.getHomesByCountry = async (req, res) => {
+module.exports.getHomesByCountry = async (req, res) => {
     try {
         const homes = await homeModel.findAll({
             where: {
@@ -82,7 +82,7 @@ exports.getHomesByCountry = async (req, res) => {
 }
 
 // Get all homes in a specific state
-exports.getHomesByState = async (req, res) => {
+module.exports.getHomesByState = async (req, res) => {
     try {
         const homes = await homeModel.findAll({
             where: {
@@ -97,7 +97,7 @@ exports.getHomesByState = async (req, res) => {
 }
 
 // Get all homes in a specific city
-exports.getHomesByCity = async (req, res) => {
+module.exports.getHomesByCity = async (req, res) => {
     try {
         const homes = await homeModel.findAll({
             where: {
@@ -112,7 +112,7 @@ exports.getHomesByCity = async (req, res) => {
 }
 
 // Get all homes of a specific property type
-exports.getHomesByPropertyType = async (req, res) => {
+module.exports.getHomesByPropertyType = async (req, res) => {
     try {
         const homes = await homeModel.findAll({
             where: {
@@ -128,7 +128,7 @@ exports.getHomesByPropertyType = async (req, res) => {
 
 // Get all homes with a price less than or equal to a specific price
 
-exports.getHomesByPrice = async (req, res) => {
+module.exports.getHomesByPrice = async (req, res) => {
     try {
         const homes = await homeModel.findAll({
             where: {

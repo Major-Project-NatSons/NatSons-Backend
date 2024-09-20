@@ -1,6 +1,6 @@
 const { sequelize } = require("./dbConfig");
 
-module.export = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
     const HomeData = sequelize.define('HomeData', {
         home_id: {
             type: DataTypes.INTEGER,
@@ -55,7 +55,5 @@ module.export = (sequelize, DataTypes) => {
             allowNull: false
         }
     });
-
-    return Home
-
+    return HomeData;
 }

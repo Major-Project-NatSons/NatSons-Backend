@@ -24,6 +24,7 @@ db.countryModel = require('./countryModel')(sequelize, DataTypes);
 db.stateModel = require('./stateModel')(sequelize, DataTypes);
 db.homeModel = require('./homeDataModel')(sequelize,DataTypes);
 db.plotData = require('./plotDataModel')(sequelize,DataTypes);
+
 // Define the One-to-Many relationship between Country and State
 db.countryModel.hasMany(db.stateModel, {
   foreignKey: 'country_id', 

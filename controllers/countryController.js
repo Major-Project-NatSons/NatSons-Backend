@@ -20,5 +20,3 @@ module.exports.getAllCountries = async (req, res) => {
         res.status(500).send({status: false, msg: 'An error occured while searching the country.'});
     }
 }
-
-

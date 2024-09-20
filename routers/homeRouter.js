@@ -2,7 +2,7 @@ const homeController = require('../controllers/homeController');
 
 const router = require('express').Router();
 
-router.post('/addNewHome',homeController.addNewHome);
+router.post('/addNewHome',homeController.createHome);
 router.get('/getAllHomes',homeController.getAllHomes);
 router.get('/getHomeById/:home_id',homeController.getHomeById);
 router.get('/getHomesByCountry/:country_id',homeController.getHomesByCountry);
