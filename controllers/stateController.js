@@ -9,6 +9,8 @@ module.exports.addNewState = async(req,res)=>{
         const newState = await stateModel.db.stateModel.create(data);
         res.status(201).send({status: true, msg: 'New State added.'});
     } catch (error) {
+        console.log(error);
+        
         res.status(500).send({status: false, msg: 'An error occured while adding a new state.'});
     }
 }

@@ -14,7 +14,13 @@ module.exports.getAllHomes = async (req, res) => {
 // Get a single home
 module.exports.getHomeById = async (req, res) => {
     try {
-        const home = await homeModel.findByPk(req.params.id);
+        const home = await homeModel.findOne(
+            {
+                where: {
+                    home_id: req.params.home_id
+                }
+            }
+        );
         if (!home) {
             return res.status(200).send({ status: false ,message: "No data found" });
         }
@@ -39,7 +45,11 @@ module.exports.createHome = async (req, res) => {
 // Update a home
 module.exports.updateHome = async (req, res) => {
     try {
-        const home = await homeModel.findByPk(req.params.id);
+        const home = await homeModel.findOne({
+            where: {
+                home_id: req.params.home_id
+            }
+        });
         if (!home) {
             return res.status(200).send({status:false, message: "Home details not found" });
         }
@@ -54,7 +64,11 @@ module.exports.updateHome = async (req, res) => {
 // Delete a home
 module.exports.deleteHome = async (req, res) => {
     try {
-        const home = await homeModel.findByPk(req.params.id);
+        const home = await homeModel.findOne({
+            where: {
+                home_id: req.params.home_id
+            }
+        });
         if (!home) {
             return res.status(200).send({status: false, message: "Home not found" });
         }
