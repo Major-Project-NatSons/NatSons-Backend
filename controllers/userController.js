@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 // Register a new user
 module.exports.register = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password, phone } = req.body;
         // Check if user already exists
         const user = await userDataModel.findOne({ where: { email } });
         if (user) {
@@ -14,7 +14,7 @@ module.exports.register = async (req, res) => {
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
         // Create a new user
-        const newUser = await userDataModel.create({ name, email, password: hashedPassword });
+        const newUser = await userDataModel.create({ name, email, password: hashedPassword, phone:phone });
         const { password: _, id, ...userDetails } = newUser.dataValues; // Exclude sensitive fields
         res.status(201).send({ status: true, data: userDetails });
     }
