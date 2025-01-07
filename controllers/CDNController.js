@@ -22,6 +22,18 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
+const pdfFilter = (req,file,cb)=>{
+    const allowedMimeTypes = ['application/pdf'];
+    if(allowedMimeTypes.includes(file.mimetype)){
+        cb(null,true);
+        }
+        else{
+            cb(null,false);
+        }
+}
+
+
+
 // Multer setup with 2MB file size limit
 const uploads = multer({
     storage: storage, 

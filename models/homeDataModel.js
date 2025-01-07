@@ -7,6 +7,18 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
+        owner_name:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        seller_name:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        seller_contact:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         address: {
             type: DataTypes.STRING,
             allowNull: false
@@ -34,6 +46,26 @@ module.exports = (sequelize, DataTypes) => {
         zip_code: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        area: {
+            type: DataTypes.FLOAT,
+            allowNull: false
+        },
+        number_of_rooms: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        number_of_bathrooms: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        no_of_kitchens:{
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        no_of_halls:{
+            type: DataTypes.INTEGER,
+            allowNull: false,
         },
         property_type: {
             type: DataTypes.STRING,

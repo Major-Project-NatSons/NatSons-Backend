@@ -20,14 +20,16 @@ const stateRouter = require('./routers/stateRouter');
 const homeRouter = require('./routers/homeRouter');
 const plotRouter = require('./routers/plotRouter');
 const cdnRouter = require('./routers/CDNRouter');
-
+const userRouter = require('./routers/userRouter');
+const homeDocRouter = require('./routers/homeDocRouter');
 // Use routers for different API routes
 app.use('/api/countries', countryRouter);
 app.use('/api/states', stateRouter);
 app.use('/api/homes', homeRouter);
 app.use('/api/plots', plotRouter);
 app.use('/api/cdn', cdnRouter);
-
+app.use('/api/users', userRouter);
+app.use('/api/homeDocs', homeDocRouter);
 // Root endpoint to verify server is running
 app.get('/', (req, res) => {
     res.send('Server is Up and Running.....!');

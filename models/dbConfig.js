@@ -24,6 +24,8 @@ db.countryModel = require('./countryModel')(sequelize, DataTypes);
 db.stateModel = require('./stateModel')(sequelize, DataTypes);
 db.homeModel = require('./homeDataModel')(sequelize,DataTypes);
 db.plotData = require('./plotDataModel')(sequelize,DataTypes);
+db.userModel = require('./userModel')(sequelize, DataTypes);
+db.homeDocsModel = require('./homeDocModel')(sequelize,DataTypes);
 
 // Define the One-to-Many relationship between Country and State
 db.countryModel.hasMany(db.stateModel, {
@@ -34,6 +36,8 @@ db.stateModel.belongsTo(db.countryModel, {
   foreignKey: 'country_id',
   as: 'country'
 });
+
+
 
 //Define one to many relation between home and country table along with home and state table.
 db.countryModel.hasMany(db.homeModel,{
@@ -71,6 +75,17 @@ db.stateModel.hasMany(db.plotData,{
 db.plotData.belongsTo(db.stateModel,{
   foreignKey: 'state_id',
   as: 'state'
+});
+
+// Define the One-to-One relationship between HomeData and HomeDocs
+
+db.homeModel.hasOne(db.homeDocsModel, {
+  foreignKey: 'home_id',
+  as: 'homeDocs'
+});
+db.homeDocsModel.belongsTo(db.homeModel, {
+  foreignKey: 'home_id',
+  as: 'home'
 });
 
 // Sync the models (create tables and define relationships)
