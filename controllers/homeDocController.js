@@ -1,4 +1,4 @@
-const docModel = require('../models/dbConfig').homeDocsModel;
+const docModel = require('../models/dbConfig').db.homeDocsModel;
 
 // Create and Save a new HomeDocs
 module.exports.createHomeDoc = (req, res) => {
