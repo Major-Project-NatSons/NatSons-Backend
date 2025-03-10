@@ -53,19 +53,15 @@ module.exports = (sequelize, DataTypes) => {
         },
         number_of_rooms: {
             type: DataTypes.INTEGER,
-            allowNull: false
         },
         number_of_bathrooms: {
             type: DataTypes.INTEGER,
-            allowNull: false
         },
         no_of_kitchens:{
             type: DataTypes.INTEGER,
-            allowNull: false
         },
         no_of_halls:{
             type: DataTypes.INTEGER,
-            allowNull: false,
         },
         property_type: {
             type: DataTypes.STRING,
@@ -81,6 +77,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         image: {
             type: DataTypes.ARRAY(DataTypes.STRING),
+        },
+        main_img:{
+            type: DataTypes.STRING,
+            allowNull: false
         },
         description: {
             type: DataTypes.STRING,

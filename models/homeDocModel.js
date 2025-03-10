@@ -38,6 +38,18 @@ module.exports = (sequelize, DataTypes) => {
         seller_pan:{
             type: DataTypes.STRING,
             allowNull: false
+        },
+        gov_approval: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        power_of_attorney: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        property_receipt: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         }
     })
     return HomeDocs;

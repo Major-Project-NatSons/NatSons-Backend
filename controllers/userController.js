@@ -16,7 +16,8 @@ module.exports.register = async (req, res) => {
         // Create a new user
         const newUser = await userDataModel.create({ name, email, password: hashedPassword, phone:phone });
         const { password: _, id, ...userDetails } = newUser.dataValues; // Exclude sensitive fields
-        res.status(201).send({ status: true, data: userDetails });
+        const token = jwt.sign({ u_id: newUser.u_id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.status(201).send({ status: true, data: {token} });
     }
     catch (err) {
         console.error(err);
@@ -48,14 +49,27 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.verifyToken = (req, res, next) => {
-    const token = req.headers['authorization'];
+    // Use lowercase 'authorization' to access the header
+    const token = req.headers['authorization']; 
+    // Check if the token is provided
     if (!token) {
-        return res.status(403).send({ status: false, message: 'No token provided' });
+        return res.status(401).send({ status: false, message: 'No token provided' });
     }
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    // Ensure the token starts with 'Bearer '
+    if (!token.startsWith("Bearer ")) {
+        return res.status(400).send({ status: false, message: 'Invalid token format' });
+    }
+
+    // Extract the actual token value by removing 'Bearer '
+    const actualToken = token.split(" ")[1];
+
+    // Verify the token using JWT
+    jwt.verify(actualToken, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.status(403).send({ status: false, message: 'Invalid token' });
         }
+
+        // Attach the decoded user information to the request
         req.user = decoded;
         next();
     });
@@ -65,7 +79,7 @@ module.exports.verifyToken = (req, res, next) => {
 // Get user profile
 module.exports.getProfile = async (req, res) => {
     try {
-        const userUId = req.user.u_id;
+        const userUId = req.params.u_id;
         const user = await userDataModel.findOne({ where: { u_id: userUId } });
         if (!user) {
             return res.status(404).send({ status: false, message: 'User not found' });
