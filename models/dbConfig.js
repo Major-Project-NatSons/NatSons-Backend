@@ -70,7 +70,7 @@ db.plotData.belongsTo(db.countryModel,{
 
 db.stateModel.hasMany(db.plotData,{
   foreignKey: 'state_id',
-  as: 'PLotData'
+  as: 'PlotData'
 });
 db.plotData.belongsTo(db.stateModel,{
   foreignKey: 'state_id',

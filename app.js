@@ -14,15 +14,16 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from the 'uploads' folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Import routers
-const countryRouter = require('./routers/countryRouter');
-const stateRouter = require('./routers/stateRouter');
-const homeRouter = require('./routers/homeRouter');
-const plotRouter = require('./routers/plotRouter');
-const cdnRouter = require('./routers/CDNRouter');
-const userRouter = require('./routers/userRouter');
-const homeDocRouter = require('./routers/homeDocRouter');
-// Use routers for different API routes
+const {
+  countryRouter,
+  stateRouter,
+  homeRouter,
+  plotRouter,
+  cdnRouter,
+  userRouter,
+  homeDocRouter
+} = require('./routers');
+
 app.use('/api/countries', countryRouter);
 app.use('/api/states', stateRouter);
 app.use('/api/homes', homeRouter);
