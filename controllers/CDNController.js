@@ -4,41 +4,34 @@ const fs = require("fs");
 
 // Set up disk storage for uploads
 const storage = multer.diskStorage({
-    destination: function(req, file, cb){
+    destination: function (req, file, cb) {
         cb(null, './uploads/'); // Directory to save files
     },
-    filename: function(req, file, cb){
+    filename: function (req, file, cb) {
         cb(null, file.originalname); // Save file with original name
     }
 });
 
-// Filter for allowed file types
+// Unified filter for images and PDFs
 const fileFilter = (req, file, cb) => {
-    const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    const allowedMimeTypes = [
+        'image/jpeg',
+        'image/png',
+        'image/jpg',
+        'application/pdf'
+    ];
     if (allowedMimeTypes.includes(file.mimetype)) {
-        cb(null, true);  // Accept file
+        cb(null, true); // Accept file
     } else {
-        cb(null, false); // Reject file
+        cb(new Error('Invalid file type. Only images and PDFs are allowed.'), false); // Reject file
     }
 };
 
-const pdfFilter = (req,file,cb)=>{
-    const allowedMimeTypes = ['application/pdf'];
-    if(allowedMimeTypes.includes(file.mimetype)){
-        cb(null,true);
-        }
-        else{
-            cb(null,false);
-        }
-}
-
-
-
 // Multer setup with 2MB file size limit
 const uploads = multer({
-    storage: storage, 
+    storage: storage,
     limits: {
-        fileSize: 1024 * 1024 * 2 // 2MB file size limit
+        fileSize: 1024 * 1024 * 2 // 2MB
     },
     fileFilter: fileFilter
 });
@@ -48,9 +41,8 @@ const serveFile = (req, res) => {
     const fileName = req.params.filename;
     const filePath = path.join(__dirname, 'uploads', fileName);
 
-    // Check if file exists
     if (fs.existsSync(filePath)) {
-        res.sendFile(filePath); // Serve the file if it exists
+        res.sendFile(filePath);
     } else {
         res.status(404).send('File not found');
     }

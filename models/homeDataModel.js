@@ -11,14 +11,18 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        seller_name:{
+        description:{
             type: DataTypes.STRING,
             allowNull: false
         },
-        seller_contact:{
-            type: DataTypes.STRING,
-            allowNull: false
-        },
+        // seller_name:{
+        //     type: DataTypes.STRING,
+        //     allowNull: false
+        // },
+        // seller_contact:{
+        //     type: DataTypes.STRING,
+        //     allowNull: false
+        // },
         address: {
             type: DataTypes.STRING,
             allowNull: false
@@ -82,10 +86,14 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        description: {
+        registry: {
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
+        affidivit:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
     });
     return HomeData;
 }

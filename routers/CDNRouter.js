@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { logger } = require('sequelize/lib/utils/logger');
 const cdnController = require('../controllers/CDNController');
 const serverURL = require('../constants').serverURL;  // Make sure serverURL is correctly defined
 
@@ -24,25 +25,28 @@ router.post('/upload/single', cdnController.uploads.single('image'), async (req,
     }
 });
 
-router.post('/upload/pdf',cdnController.uploads.single('pdf'),async(req,res)=>{
-    if(!req.file){
+router.post('/upload/pdf', cdnController.uploads.single('pdf'), async (req, res) => {
+    if (!req.file) {
         return res.status(400).send({
             message: 'No file uploaded or invalid file type',
         });
     }
-    try{
+    
+    try {
+        console.log(req.file);
         const url = `${serverURL}/uploads/${req.file.filename}`;
         console.log('Single file uploaded:', req.file.filename);
         res.status(201).send({
             pdfUrl: url,
         });
-    }catch(error){
+    } catch (error) {
         console.error('Error uploading single file:', error);
         res.status(500).send({
             message: 'File upload failed',
         });
-}
+    }
 });
+
 // Multiple Image Upload
 router.post('/upload/multiple', cdnController.uploads.array('images', 10), async (req, res) => {
     if (!req.files || req.files.length === 0) {
