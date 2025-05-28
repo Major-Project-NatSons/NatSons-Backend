@@ -26,6 +26,7 @@ db.homeModel = require('./homeDataModel')(sequelize,DataTypes);
 db.plotData = require('./plotDataModel')(sequelize,DataTypes);
 db.userModel = require('./userModel')(sequelize, DataTypes);
 db.homeDocsModel = require('./homeDocModel')(sequelize, DataTypes);
+db.contactUsModel = require('./contactUsModel')(sequelize, DataTypes);
 
 // Define the One-to-Many relationship between Country and State
 db.countryModel.hasMany(db.stateModel, {

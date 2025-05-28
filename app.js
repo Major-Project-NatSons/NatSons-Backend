@@ -21,7 +21,8 @@ const {
   plotRouter,
   cdnRouter,
   userRouter,
-  homeDocRouter
+  homeDocRouter,
+  contactUsRouter
 } = require('./routers');
 
 app.use('/api/countries', countryRouter);
@@ -31,6 +32,7 @@ app.use('/api/plots', plotRouter);
 app.use('/api/cdn', cdnRouter);
 app.use('/api/users', userRouter);
 app.use('/api/homeDocs', homeDocRouter);
+app.use('/api/contactUs', contactUsRouter);
 // Root endpoint to verify server is running
 app.get('/', (req, res) => {
     res.send('Server is Up and Running.....!');
