@@ -5,7 +5,7 @@ const plotRouter = require('./plotRouter');
 const cdnRouter = require('./CDNRouter');
 const userRouter = require('./userRouter');
 const homeDocRouter = require('./homeDocRouter');
-
+const contactUsRouter = require('./contactUsRouter');
 module.exports = {
   countryRouter,
   stateRouter,
@@ -13,5 +13,6 @@ module.exports = {
   plotRouter,
   cdnRouter,
   userRouter,
-  homeDocRouter
+  homeDocRouter,
+  contactUsRouter
 };
